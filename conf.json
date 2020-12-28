@@ -1,0 +1,9 @@
+{
+	"maxplayers" : 20,
+	"name" : "main", 
+	"gamemode" : "main", 
+	"stream-distance" : 500.0,
+	"announce" : false,
+	"csharp" : "disabled",
+	"port": 22005
+}
