@@ -1,11 +1,15 @@
 {
   "dependencies": {
+    "knex": "^0.21.15",
     "log4js": "^6.3.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "pg": "^8.5.1",
     "webpack-node-externals": "^2.5.2"
   },
   "devDependencies": {
-    "@types/ragemp-s": "github:CocaColaBear/types-ragemp-s#v1.0",
     "@types/ragemp-c": "github:CocaColaBear/types-ragemp-c#v1.0",
+    "@types/ragemp-s": "github:CocaColaBear/types-ragemp-s#v1.0",
     "copy-webpack-plugin": "^7.0.0",
     "eslint": "^7.16.0",
     "eslint-plugin-import": "^2.22.1",
