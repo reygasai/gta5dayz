@@ -1,4 +1,13 @@
-import './modules/test/main';
-import Test from './modules/test/main';
-let t = new Test;
-t.init();
+import { chat } from "./modules/chat/main";
+import { Character } from "./modules/character/main";
+
+import Debug from "./classes/utils/debug";
+
+chat.init();
+
+let debug = new Debug();
+debug.init();
+
+
+let ch = new Character;
+ch.init();
