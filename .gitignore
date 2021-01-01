@@ -6,6 +6,10 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
+#linux server tar
+./linux_x64.tar.gz
+linux_x64.tar.gz
+
 #server package
 packages/main/*
 
