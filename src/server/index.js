@@ -1,7 +1,7 @@
 import { chat } from "./modules/chat/main";
 import { Character } from "./modules/character/main";
 
-import Debug from "./classes/utils/debug";
+import Debug from "./system/utils/debug";
 
 chat.init();
 

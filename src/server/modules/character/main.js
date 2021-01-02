@@ -1,4 +1,5 @@
 import { Player } from "./player";
+import { Properties } from "./properties";
 
 export class Character {
     init() {

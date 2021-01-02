@@ -6,14 +6,10 @@ export class Player {
     }
 
     init() {
-        this.setProperties();
+        this.getProperties();
     }
 
-    setProperties() {
-        let properties = new Properties(this.player.socialClub);
-
-        for(var property in properties) {
-            this.player[property] = properties[property]; 
-        }
+    async getProperties() {
+        await new Properties().player(this.player.name).get();
     }
 }
