@@ -1,0 +1,120 @@
+@font-face {
+    font-family: 'Kometa Medium';
+    src: url('./fonts/Kometa-Medium.eot');
+    src: local('Kometa Medium'), local('Kometa-Medium'),
+        url('./fonts/Kometa-Medium.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/Kometa-Medium.woff2') format('woff2'),
+        url('./fonts/Kometa-Medium.woff') format('woff'),
+        url('./fonts/Kometa-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Kometa Regular';
+    src: url('./fonts/Kometa-Regular.eot');
+    src: local('Kometa Regular'), local('Kometa-Regular'),
+        url('./fonts/Kometa-Regular.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/Kometa-Regular.woff2') format('woff2'),
+        url('./fonts/Kometa-Regular.woff') format('woff'),
+        url('./fonts/Kometa-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Kometa Unicase';
+    src: url('../fonts/KometaUnicase-Thin.eot');
+    src: local('Kometa Unicase Thin'), local('KometaUnicase-Thin'),
+        url('../fonts/KometaUnicase-Thin.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/KometaUnicase-Thin.woff2') format('woff2'),
+        url('../fonts/KometaUnicase-Thin.woff') format('woff'),
+        url('../fonts/KometaUnicase-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Kometa';
+    src: url('../fonts/Kometa-Light.eot');
+    src: local('Kometa Light'), local('Kometa-Light'),
+        url('../fonts/Kometa-Light.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Kometa-Light.woff2') format('woff2'),
+        url('../fonts/Kometa-Light.woff') format('woff'),
+        url('../fonts/Kometa-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Kometa';
+    src: url('../fonts/Kometa-ThinItalic.eot');
+    src: local('Kometa Thin Italic'), local('Kometa-ThinItalic'),
+        url('../fonts/Kometa-ThinItalic.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Kometa-ThinItalic.woff2') format('woff2'),
+        url('../fonts/Kometa-ThinItalic.woff') format('woff'),
+        url('../fonts/Kometa-ThinItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Kometa Unicase';
+    src: url('../fonts/KometaUnicase-Heavy.eot');
+    src: local('Kometa Unicase Heavy'), local('KometaUnicase-Heavy'),
+        url('../fonts/KometaUnicase-Heavy.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/KometaUnicase-Heavy.woff2') format('woff2'),
+        url('../fonts/KometaUnicase-Heavy.woff') format('woff'),
+        url('../fonts/KometaUnicase-Heavy.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Kometa';
+    src: url('../fonts/Kometa-LightItalic.eot');
+    src: local('Kometa Light Italic'), local('Kometa-LightItalic'),
+        url('../fonts/Kometa-LightItalic.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Kometa-LightItalic.woff2') format('woff2'),
+        url('../fonts/Kometa-LightItalic.woff') format('woff'),
+        url('../fonts/Kometa-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Kometa Unicase';
+    src: url('../fonts/KometaUnicase-Light.eot');
+    src: local('Kometa Unicase Light'), local('KometaUnicase-Light'),
+        url('../fonts/KometaUnicase-Light.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/KometaUnicase-Light.woff2') format('woff2'),
+        url('../fonts/KometaUnicase-Light.woff') format('woff'),
+        url('../fonts/KometaUnicase-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Kometa';
+    src: url('../fonts/Kometa-Italic.eot');
+    src: local('Kometa Italic'), local('Kometa-Italic'),
+        url('../fonts/Kometa-Italic.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Kometa-Italic.woff2') format('woff2'),
+        url('../fonts/Kometa-Italic.woff') format('woff'),
+        url('../fonts/Kometa-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Kometa Book';
+    src: url('../fonts/Kometa-Book.eot');
+    src: local('Kometa Book'), local('Kometa-Book'),
+        url('../fonts/Kometa-Book.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Kometa-Book.woff2') format('woff2'),
+        url('../fonts/Kometa-Book.woff') format('woff'),
+        url('../fonts/Kometa-Book.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

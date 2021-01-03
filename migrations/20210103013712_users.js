@@ -6,8 +6,8 @@ exports.up = function(knex) {
         let column = _table.colums; 
 
         table.increments(column.id).primary();
-        table.string(column.name, 120).unique();
-        table.string(column.email, 255).unique();
+        table.string(column.name, 120).unique().notNullable();
+        table.string(column.email, 255).unique().notNullable();
         table.string(column.password, 255).notNullable();
         table.integer(column.group, 2).notNullable();
 

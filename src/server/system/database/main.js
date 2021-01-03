@@ -1,5 +1,5 @@
 import Knex from 'knex';
-import config from "./config";
+const config = require("./config").config; 
 
 export const DBTables = config.tables;
 export const Database = Knex({
