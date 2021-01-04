@@ -10,7 +10,7 @@
     <div class="layout authorization">
         <div class="auth-pane">
             <div class="auth-pane-content">
-                <form id="auth-pane-content-form">
+                <form class="auth-pane-content-form display" id="auth">
                     <label class="auth-group">
                         <div class="auth-group-title">
                             <svg 
@@ -48,18 +48,89 @@
                         </div>
                     </label>
 
-                    <label class="auth-group buttons">
-                        <button class="auth-button">
+                    <div class="auth-group buttons">
+                        <button class="auth-button" id="authorize">
                             <div class="name">Войти в игру</div>
                         </button>
 
                         <span class="else">или</span>
 
-                        <button class="auth-button blue">
+                        <button class="auth-button blue" route="register">
                             <div class="name">Создать аккаунт</div>
                         </button>
-                    </label>
+                    </div>
                 </form>
+
+                <form class="auth-pane-content-form" id="register">
+                    <label class="auth-group">
+                        <div class="auth-group-title">
+                            <svg 
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                width="13px" height="15px">
+                                <image  x="0px" y="0px" width="13px" height="15px"  xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAPCAQAAACVKo38AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQflAQQAGhXlr4BGAAAAsElEQVQY03WLrQ3CUBhFzysJKUnlQxAM6O6AwEJQqIYJOgCiAzBHB0ARsAgW6AIVpAkgvtZVoHiI/lCgPdfc3JOLoYj4EouRWPxqqUQgpk5QbMoAqYNgU/FkqHOwAHAbAmxcqFTGN1mtdEzUEJGOPy/wSMqW4BVFmXJJHdZMuLLXea1SixUz4MSNMQvgwkG/lAw4MueXM8vedseGf6b0ldwZ0cZDiaEDiy5lLMJWaQjfHutKI7l8du8AAAAASUVORK5CYII=" />
+                            </svg>
+
+                            <div class="name">Игровой ник</div>
+                        </div>
+                        <input type="text" name="login" placeholder="Введите ник">
+                    </label>
+
+                    <label class="auth-group">
+                        <div class="auth-group-title">
+                            <svg 
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                width="13px" height="15px">
+                                <image  x="0px" y="0px" width="13px" height="15px"  xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAPCAQAAACVKo38AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQflAQQAGhXlr4BGAAAAsElEQVQY03WLrQ3CUBhFzysJKUnlQxAM6O6AwEJQqIYJOgCiAzBHB0ARsAgW6AIVpAkgvtZVoHiI/lCgPdfc3JOLoYj4EouRWPxqqUQgpk5QbMoAqYNgU/FkqHOwAHAbAmxcqFTGN1mtdEzUEJGOPy/wSMqW4BVFmXJJHdZMuLLXea1SixUz4MSNMQvgwkG/lAw4MueXM8vedseGf6b0ldwZ0cZDiaEDiy5lLMJWaQjfHutKI7l8du8AAAAASUVORK5CYII=" />
+                            </svg>
+
+                            <div class="name">Электронная почта</div>
+                        </div>
+                        <input type="email" name="mail" placeholder="reygasai@ya.ru">
+                    </label>
+
+                    <label class="auth-group">
+                        <div class="auth-group-title">
+                            <svg 
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                width="14px" height="16px">
+                                <image  x="0px" y="0px" width="14px" height="16px"  xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAQAAACMnYaxAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQflAQQBAzLaZ/YCAAAA3ElEQVQY03WPsUrDUBSGv4SAQocMuUhHXyCzkxUqDr6BfQOnbkLF3QfIJh3q5nvYIZpSFwfduwgniIM0RUJOl5vbG6j/cs4933/+ww2UVmXMMd9mxU6KokgiT1KLispSTtROAwXKHjmp8284MwVACMCYFHjkkhsqDsm8WHkRldweuBUVlSNF7WYfWFh34SZE7lJj6yv31Hx2oZX55a7tAzlnxBU9PmxgqzeTBfJDzH4NQg99cc2zB5PQe8zMAxN/1Yd/QPUfPC0PuPBhROMMQ9Ydcx0ydd/v5rwz3wLgJE2b0olJDAAAAABJRU5ErkJggg==" />
+                            </svg>
+                            
+                            <div class="name">Пароль</div>
+                        </div>
+                        <input type="password" name="password-one" placeholder="****">
+                    </label>
+
+                    <label class="auth-group">
+                        <div class="auth-group-title">
+                            <svg 
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                width="14px" height="16px">
+                                <image  x="0px" y="0px" width="14px" height="16px"  xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAQAAACMnYaxAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQflAQQBAzLaZ/YCAAAA3ElEQVQY03WPsUrDUBSGv4SAQocMuUhHXyCzkxUqDr6BfQOnbkLF3QfIJh3q5nvYIZpSFwfduwgniIM0RUJOl5vbG6j/cs4933/+ww2UVmXMMd9mxU6KokgiT1KLispSTtROAwXKHjmp8284MwVACMCYFHjkkhsqDsm8WHkRldweuBUVlSNF7WYfWFh34SZE7lJj6yv31Hx2oZX55a7tAzlnxBU9PmxgqzeTBfJDzH4NQg99cc2zB5PQe8zMAxN/1Yd/QPUfPC0PuPBhROMMQ9Ydcx0ydd/v5rwz3wLgJE2b0olJDAAAAABJRU5ErkJggg==" />
+                            </svg>
+                            
+                            <div class="name">Повтор пароля</div>
+                        </div>
+                        <input type="password" name="password-two" placeholder="****">
+                    </label>
+
+                    <div class="auth-group buttons">
+                        <button class="auth-button" id="authorize">
+                            <div class="name">Регистрация аккаунта</div>
+                        </button>
+
+                        <span class="else">или</span>
+
+                        <button class="auth-button blue" route="auth">
+                            <div class="name">Войти в аккаунт</div>
+                        </button>
+                    </div>
+                </form>
+                
             </div>
         </div>
         <div class="auth-notice error">
@@ -67,5 +138,6 @@
             <div class="description">Неверный логин или пароль</div>
         </div>
     </div>
+    <script src="./index.js"></script>
 </body>
 </html>

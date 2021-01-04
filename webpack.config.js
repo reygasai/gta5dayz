@@ -11,6 +11,7 @@ module.exports = {
     entry: { 
         'packages/main': './src/server',
         'client_packages': ['./src/client', './src/client/ui/styles/main.scss'],
+        'client_packages/ui/templates/authorization': './src/client/ui/templates/authorization'
     },
 
     output: {

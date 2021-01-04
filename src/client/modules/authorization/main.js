@@ -1,16 +1,38 @@
 export class Authorization {
-    init() {
-        let block = false;
-        var loginBrowser;
+    constructor() {
+        this.pane;
+        this.display = false;
+    }
 
-        mp.keys.bind(0x46, true, function() {
-            if(!block) {
-                loginBrowser = mp.browsers.new('package://ui/templates/authorization/index.html');
+    init() {
+        this.paneController();
+        this.registerEvents();
+    }
+
+    registerEvents() {
+        mp.events.add("CEF::Auth.SendAuthorizeData", (jsonData) => {
+            mp.events.callRemote("CLENT::Auth.SendAuthorizeData", jsonData);
+        });
+
+        mp.events.add("SERVER::Auth.ErrorSendedData", (jsonData) => {
+            this.sendNoticeCEF(jsonData)
+        });
+    }
+
+    sendNoticeCEF(message, type = false) {
+        return this.pane.execute(`alert(${message});`);
+    }
+
+    paneController() {
+        mp.keys.bind(0x46, true, () => {
+            if(!this.display) {
+                this.pane = mp.browsers.new('package://ui/templates/authorization/index.html');
             } else {
-                loginBrowser.destroy();
+                this.pane.destroy();
             }
-            
-            block = !block;
+
+            this.display = !this.display;
+            mp.gui.cursor.show(this.display, this.display);
         });
     }
 }

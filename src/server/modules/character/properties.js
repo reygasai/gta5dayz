@@ -37,7 +37,7 @@ export class Properties {
         
         try {
             let data = await Database.select('*').from(table.name).where(table.colums.name, '=', this._p).limit(1);
-            console.log(data.length);
+            //console.log(data.length);
 
             if(data.length == 0) {
                 let data = await Database(table.name).insert({
