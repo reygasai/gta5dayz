@@ -96,7 +96,7 @@ class UIAuthorization {
 }
 
 document.addEventListener("DOMContentLoaded", function(event) { 
-    let UI = new UIAuthorization;
+    let UI = document.authUI = new UIAuthorization;
     UI.route();
     UI.authPane();
 });

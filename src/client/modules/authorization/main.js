@@ -15,12 +15,13 @@ export class Authorization {
         });
 
         mp.events.add("SERVER::Auth.ErrorSendedData", (jsonData) => {
-            this.sendNoticeCEF(jsonData)
+            let data = JSON.parse(jsonData);
+            this.notice(data.message);
         });
     }
 
-    sendNoticeCEF(message, type = false) {
-        return this.pane.execute(`alert(${message});`);
+    notice(message) {
+        this.pane.execute(`document.authUI.notify("${message}");`);
     }
 
     paneController() {
