@@ -1,115 +1,40 @@
-import { Database, DBTables } from "../../system/database/main";
-import { Utils } from "../../system/utils/main";
+import Basic from "./basic";
 import bcrypt from 'bcrypt';
-/*
-export class Auth {
-    validation() {
-        let errorString = '';
 
-        if(!this.login || this.login === "" || !this.password || this.password === "") {
-            errorString = 'Поле с логином или паролем пустое!';
-        }
-
-        if(!(/^[a-zA-Z0-9_]+$/.exec(this.login))) {
-            errorString = 'Поле с ником содержит запрещенные символы!';
-        }
-
-        if(errorString.length > 0) {
-            Utils.playerAlert(this.player, "SERVER::Authorization.DisplayError", errorString, false);
-            return false;
-        }
-
-        return true;
-    }
-
+export default class Auth extends Basic {
     async authorize(player, data) {
         data = JSON.parse(data);
 
-        const login = data.login;
+        const login = data.login.trim();
         const password = data.password;
         
-        if(!this.validation(login, password)) {
-            return;
-        }
-    }   
-}
-*/
-export class Auth {
-    constructor(player, data) {
-        console.log(data);
-
-        this.table = DBTables.users;
-
-        this.login;
-        this.password;
-        this.player;
-    }
-
-    init() {
-
-    }
-
-    registerEvents() {
-        //mp.events.add("CLIENT::Authorization.SendAuthData", this.authorizeClient.bind(this));
-    }
-
-    validation() {
-        let errorString = '';
-
-        if(!this.login || this.login === "" || !this.password || this.password === "") {
-            errorString = 'Поле с логином или паролем пустое!';
-        }
-
-        if(!(/^[a-zA-Z0-9_]+$/.exec(this.login))) {
-            errorString = 'Поле с ником содержит запрещенные символы!';
-        }
-
-        if(errorString.length > 0) {
-            Utils.playerAlert(this.player, "SERVER::Authorization.DisplayError", errorString, false);
-            return false;
-        }
-
-        return true;
-    }
-
-    async loadData() {
-        let result = await Database.select(this.table.colums.name)
-            .select(this.table.colums.password)
-            .from(this.table.name)
-            .where(this.table.colums.name, '=', this.login)
-            .limit(1);
-
-        if(!result || result.length === 0) {
+        if(!this.validationLogin(login)) {
+            this.playerAlert(player, "SERVER::Authorization.DisplayError", "Поле с ником пустое или содержит запрещенные символы!", false);
             return {};
         }
 
-        return result[0];
-    }
-
-    async authorizeClient(player, data) {
-        data = JSON.parse(data);
-
-        this.login = data.login;
-        this.password = data.password;
-        this.player = player;
-
-        if(!this.validation()) {
-            return;
+        if(!this.isEmptyOrLess4Chars(password)) {
+            this.playerAlert(player, "SERVER::Authorization.DisplayError", "Поле с паролем пустое или содержит меньше 4х символов!", false);
+            return {};
         }
 
-        let userData = await this.loadData();
-
-        if(Object.keys(userData).length === 0) {
-            Utils.playerAlert(this.player, "SERVER::Authorization.DisplayError", "Такого пользователя нету в базе данных!", false);
-            return;
+        try {
+            let playerData = await this.loadData(login);
+            if(Object.keys(playerData).length === 0) {
+                this.playerAlert(player, "SERVER::Authorization.DisplayError", "Такого пользователя нету в базе данных!", false);
+                return {};
+            }
+    
+            let comparePasswordsResult = await bcrypt.compare(password, playerData.password);
+            if(!comparePasswordsResult) {
+                this.playerAlert(player, "SERVER::Authorization.DisplayError", "Логин и пароль не подходит к данному аккаунту!", false);
+                return {};
+            } else {
+                return playerData;
+            }
+        } catch(error) {
+            //TODO: Завезти логи
+            console.log(error);
         }
-
-        let compareResult = await bcrypt.compare(this.password, userData.password);
-        
-        if(compareResult) {
-            Utils.playerAlert(this.player, "SERVER::Authorization.DisplayError", "Авторизовали!", false);
-        } else {
-            Utils.playerAlert(this.player, "SERVER::Authorization.DisplayError", "Логин или пароль не верны!", false);
-        }
-    }
+    }   
 }

@@ -1,72 +1,114 @@
-import { Database, DBTables } from "../../system/database/main";
+import { Config } from "../world/config";
 
-export class Properties {
+export default class Properties {
     constructor() {
-        this._p;
-        this._id;
-
         this.name;
-        this.email = 'admin@ya.ru';
-        this.password = 'testpassword';
-        this.group = 1;
+        this.email;
+        this.password;
+        this.group;
 
-        this.thirst = 100;
-        this.hunger = 100;
+        this.heal;
+        this.armour;
+        this.thirst;
+        this.hunger;
+        
+        this.isBleeding;
+        
+        this.lastDead;
+        this.lastSpawn;
+        
+        this.x;
+        this.y;
+        this.z;
+        this.rotation;
+        
+        this.isAuthorize = true;
 
-        this.isBleeding = false;
-        this.isSprinting = false ;
-
-        this.lastDead = 1;
-        this.lastSpawn = 1;
-
-        this.x = 0;
-        this.y = 0;
-        this.z = 0;
-        this.rotation = 0;
-
-        this.inventory = {};
+        this.alpha = 255;
     }
 
-    player(player) {
-        this._p = player;
+    getRandomSpawnpoint() {
+        let randomKey = Math.floor(Math.random() * Math.floor(Object.keys(Config.playerSpawnPoints).length));
+        return Config.playerSpawnPoints[randomKey];
+    }
+
+    setDefaultProperties(isPlayerSpawn = false) {
+        this.heal = 100;
+        this.armour = 0;
+        this.thirst = 100;
+        this.hunger = 100;
+        this.lastSpawn = Date.now();
+        
+        this.isAuthorize = true;
+
+        if(isPlayerSpawn) {
+            this.lastDead = Date.now();
+            
+            let randomPosition = this.getRandomSpawnpoint();
+            this.x = parseFloat(randomPosition.x);
+            this.y = parseFloat(randomPosition.y);
+            this.z = parseFloat(randomPosition.z);
+            this.rotation = 0;
+        }
+
         return this;
     }
 
-    async get() {
-        let table = DBTables.users;
+    getProperties(properties) {
+        this.name = properties.name
+        this.email = properties.email;
+        this.password = properties.password;
+        this.group = properties.group;
+
+        this.heal = 100;
+        this.armour = 100;
+        this.thirst = (properties.thirst > 100) ? 100 : properties.thirst;
+        this.hunger = (properties.hunger > 100) ? 100 : properties.hunger;
         
-        try {
-            let data = await Database.select('*').from(table.name).where(table.colums.name, '=', this._p).limit(1);
-            //console.log(data.length);
+        this.isBleeding = Boolean(properties.is_bleeding);
+        
+        this.lastDead = properties.last_dead;
+        this.lastSpawn = properties.last_spawn;
+        
+        this.x = parseFloat(properties.x);
+        this.y = parseFloat(properties.y);
+        this.z = parseFloat(properties.z);
+        this.rotation = parseFloat(properties.rotation);
+        
+        this.isAuthorize = true;
 
-            if(data.length == 0) {
-                let data = await Database(table.name).insert({
-                    name: this._p,
-                    email: this.email,
-                    password: this.password,
-                    group: this.group,
-                    thirst: this.thirst,
-                    hunger: this.hunger,
-                    is_bleeding: this.isBleeding,
-                    is_sprinting: this.isSprinting,
-                    last_dead: this.lastDead,
-                    last_spawn: this.lastSpawn,
-                    x: this.x,
-                    y: this.y,
-                    z: this.z,
-                    rotation: this.rotation,
-                    inventory: '{}'
-                });
-            } else {
-                //console.log(data);
-            }
-
-        } catch(error) {
-            console.error(error);
-        } 
+        return this;
     }
 
-    save() {
+    setDataPlayer(player) {
+        //Обернуть в Promise и ловить ошибки
+        if(player) {
+            player.name = this.name;
+            player.email = this.email;
+            player.password = this.password;
+            player.group = this.group;
+            
+            player.heal = this.heal;
+            player.armour = this.armour;
+            player.thirst = this.thirst;
+            player.hunger = this.hunger;
+
+            player.isBleeding = this.isBleeding
+
+            player.lastDead = this.lastDead;
+            player.lastSpawn = this.lastSpawn;
+
+            player.spawn(new mp.Vector3(this.x, this.y, this.z));
+
+            player.alpha = this.alpha;
+        }
+    }
+
+    saveDataPlayer(player) {
+
+    }
+
+    updateDataPlayer(player) {
 
     }
 }

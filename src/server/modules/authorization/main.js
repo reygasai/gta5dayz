@@ -1,18 +1,17 @@
 import { Config } from "./config";
-import { Auth } from "./auth";
+import Properties from "../character/properties";
+import Auth from "./auth";
 
-//После работы - удалить через delete
-export class Authorization {
+export default class Authorization {
     init() {
         this.registerEvents();
-
         this.authHandler = new Auth;
     }
 
     registerEvents() {
         mp.events.add({
-            "playerReady": this.readyPlay.bind(this),
-            "CLIENT::Authorization.SendAuthData": this.auth,
+            "playerReady": this.readyPlay,
+            "CLIENT::Authorization.SendAuthData": this.auth.bind(this),
             "CLIENT::Authorization.SendRegisterData": this.register
         });
     }
@@ -23,15 +22,20 @@ export class Authorization {
         player.alpha = 0;
     }
 
-    auth(player, data) {
-        const authResult = this.authHandler.authorize(player, data);
+    async auth(player, data) {
+        let authResult = await this.authHandler.authorize(player, data);
+        if(Object.keys(authResult).length > 0) {
+            this.loadCharacterProperties(player, authResult);
+            player.call("SERVER::Authorization.Camera", [JSON.stringify({}), false]);
+        }
     }
 
     register() {
-
+        
     }
 
-    createCharacter(...options) {
-
+    loadCharacterProperties(player, data) {
+        let setProperties = new Properties().getProperties(data).setDataPlayer(player);
+        //character.setProperties(data);
     }
 }

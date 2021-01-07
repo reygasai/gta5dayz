@@ -22,7 +22,7 @@ export class Authorization {
 
     notice(data) {
         let jsonData = JSON.parse(data);
-        this.pane.execute(`document.authUI.notify("${jsonData.message}");`);
+        this.mainPane.execute(`document.authUI.notify("${jsonData.message}");`);
     }
 
     cameraController(position, create = true) {
@@ -48,6 +48,7 @@ export class Authorization {
 
             this.paneController(true);
         } else {
+            mp.game.cam.renderScriptCams(false, false, 0, true, false);
             this.authCamera.destroy();
             this.paneController(false);
             mp.players.local.freezePosition(false);
