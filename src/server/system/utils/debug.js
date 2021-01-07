@@ -13,10 +13,15 @@ export default class Debug {
         });
 
         mp.events.addCommand('player', this.playerInfo);
+        mp.events.addCommand('pos', this.pos);
     }
 
     playerInfo(player) {
         console.log(player);
+    }
+
+    pos(player) {
+        player.outputChatBox(`x:${player.position.x} y:${player.position.y} z:${player.position.z}`);
     }
 
     displayDebug(player, _this) {

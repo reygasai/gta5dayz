@@ -1,6 +1,7 @@
 import { chat } from "./modules/chat/main";
 import { Character } from "./modules/character/main";
 import { Auth } from "./modules/authorization/auth";
+import { Authorization } from "./modules/authorization/main";
 
 import Debug from "./system/utils/debug";
 
@@ -12,5 +13,8 @@ debug.init();
 let ch = new Character;
 ch.init();
 
-let au = new Auth;
-au.registerEvents();
+let au = new Authorization;
+au.init();
+
+let at = new Auth;
+at.registerEvents();

@@ -1,39 +1,66 @@
 export class Authorization {
     constructor() {
-        this.pane;
-        this.display = false;
+        this.mainPane;
+        this.authCamera;
     }
 
     init() {
-        this.paneController();
         this.registerEvents();
     }
 
     registerEvents() {
-        mp.events.add("CEF::Auth.SendAuthorizeData", (jsonData) => {
-            mp.events.callRemote("CLENT::Auth.SendAuthorizeData", jsonData);
-        });
-
-        mp.events.add("SERVER::Auth.ErrorSendedData", (jsonData) => {
-            let data = JSON.parse(jsonData);
-            this.notice(data.message);
+        mp.events.add({
+            "SERVER::Authorization.Camera": this.cameraController.bind(this),
+            "CEF::Authorization.SendAuthData": this.sendAuthData,
+            "SERVER::Authorization.DisplayError": this.notice.bind(this) 
         });
     }
 
-    notice(message) {
-        this.pane.execute(`document.authUI.notify("${message}");`);
+    sendAuthData(data) {
+        mp.events.callRemote("CLIENT::Authorization.SendAuthData", data);
     }
 
-    paneController() {
-        mp.keys.bind(0x46, true, () => {
-            if(!this.display) {
-                this.pane = mp.browsers.new('package://ui/templates/authorization/index.html');
-            } else {
-                this.pane.destroy();
-            }
+    notice(data) {
+        let jsonData = JSON.parse(data);
+        this.pane.execute(`document.authUI.notify("${jsonData.message}");`);
+    }
 
-            this.display = !this.display;
-            mp.gui.cursor.show(this.display, this.display);
-        });
+    cameraController(position, create = true) {
+        const dataPosition = JSON.parse(position);
+        
+        position = {
+            x: parseFloat(dataPosition.x),
+            y: parseFloat(dataPosition.y),
+            z: parseFloat(dataPosition.z),
+        }
+
+        if(create) {
+            mp.players.local.freezePosition(true);
+
+            this.authCamera = mp.cameras.new('default', 
+                new mp.Vector3(position.x, position.y, position.z), 
+                new mp.Vector3(0, 0, 0), 40);
+            
+            this.authCamera.pointAtCoord(position.x, position.y / 2, position.z);
+
+            this.authCamera.setActive(true);
+            mp.game.cam.renderScriptCams(true, false, 0, true, false);
+
+            this.paneController(true);
+        } else {
+            this.authCamera.destroy();
+            this.paneController(false);
+            mp.players.local.freezePosition(false);
+        }
+    }
+
+    paneController(display = true) {
+        if(display) {
+            this.mainPane = mp.browsers.new('package://ui/templates/authorization/index.html');
+        } else {
+            this.mainPane.destroy();
+        }
+        
+        mp.gui.cursor.show(display, display);
     }
 }
