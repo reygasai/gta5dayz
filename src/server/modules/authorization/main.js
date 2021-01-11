@@ -12,7 +12,7 @@ export default class Authorization {
         mp.events.add({
             "playerReady": this.readyPlay,
             "CLIENT::Authorization.SendAuthData": this.auth.bind(this),
-            "CLIENT::Authorization.SendRegisterData": this.register
+            "CLIENT::Authorization.SendRegisterData": this.register.bind(this),
         });
     }
 
@@ -36,6 +36,5 @@ export default class Authorization {
 
     loadCharacterProperties(player, data) {
         let setProperties = new Properties().getProperties(data).setDataPlayer(player);
-        //character.setProperties(data);
     }
 }

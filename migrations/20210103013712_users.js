@@ -11,11 +11,12 @@ exports.up = function(knex) {
         table.string(column.password, 255).notNullable();
         table.integer(column.group, 2).notNullable();
 
+        table.integer(column.heal, 3).notNullable();
+        table.integer(column.armour, 3).notNullable();
         table.integer(column.thirst, 3).notNullable();
         table.integer(column.hunger, 3).notNullable();
 
         table.boolean(column.isBleeding).notNullable();
-        table.boolean(column.isSprinting).notNullable();
 
         table.integer(column.lastDead, 255).notNullable();
         table.integer(column.lastSpawn, 255).notNullable();

@@ -60,8 +60,8 @@ export default class Properties {
         this.password = properties.password;
         this.group = properties.group;
 
-        this.heal = 100;
-        this.armour = 100;
+        this.heal = (properties.heal > 100) ? 100 : properties.heal;
+        this.armour = (properties.armour > 100) ? 100 : properties.armour;
         this.thirst = (properties.thirst > 100) ? 100 : properties.thirst;
         this.hunger = (properties.hunger > 100) ? 100 : properties.hunger;
         

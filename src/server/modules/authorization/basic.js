@@ -68,4 +68,3 @@ export default class Basic {
         return rageXPStringEmail.exec(String(value));
     }
 } 
-
